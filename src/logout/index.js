@@ -31,6 +31,7 @@ const Logout = () => {
             dispatch({
                 type:"logout"
             })
+            
             navigate('/')
             
     })

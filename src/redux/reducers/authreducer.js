@@ -1,6 +1,5 @@
 const initialState = {
     loggedIn: false,
-    token:''
     
 
 
@@ -14,7 +13,6 @@ const Authreducer = (state = initialState, action) => {
             return {
                 ...state,
                 loggedIn: true,
-                token: action.payload,
                 
                 
             }
@@ -22,7 +20,6 @@ const Authreducer = (state = initialState, action) => {
             return {
                 ...state,
                 loggedIn: false,
-                token: '',
             }
         default:
             return state

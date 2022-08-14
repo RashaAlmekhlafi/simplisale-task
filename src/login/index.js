@@ -45,9 +45,10 @@ const Login = () => {
                         })
                     } else {
                         setMessg(' ')
+                        window.localStorage.setItem('token', result?.data?.login);
+
                         dispatch({
                             type: "login",
-                            payload:[result?.data?.login]
                         })
 
                         navigate('/home')
@@ -64,11 +65,11 @@ const Login = () => {
 
         <div className='container p-5 '>
             <div className='row'>
-                <div className='col-lg-7 col-md-12 col-sm-12 p-5'>
+                <div className='col-lg-7 col-md-6 col-sm-12 p-5'>
                     <h1 className='welcome '>Wellcome to OurWebsiste</h1>
                     <p>Lorem ipsum amet recusandae est quia repellat eum voluptatem voluptatibus vel galisum quibusdam id dolores maiores. Et facilis suscipit et modi beatae sit assumenda asperiores ex laboriosam architecto ea temporibus sint sed internos minima aut pariatur eveniet. Est cupiditate minus ex quis dolorem error quis nam molestiae accusantium et eveniet voluptatem rem dicta minus.</p>
                 </div>
-                <div className='col-lg-5 col-md-12 col-sm-12 login d-flex flex-column justify-content-center'>
+                <div className='col-lg-5 col-md-6 col-sm-12 login d-flex flex-column justify-content-center'>
                     <h3>Please Login</h3>
                     <>
                         <div className="mb-3">

@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// import { useSelector } from 'react-redux';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 const Profile = () => {
-    // const UserName = useSelector((state) => state.auth.UserName)
-    // const User_Id = useSelector((state) => state.auth.UserId)
-    // const Admin = useSelector((state) => state.auth.Admin)
     const [UserData, setUserData] = useState('')
-    const [UserId, setUserId] = useState(0)
-    const { pathname } = useLocation()
-    const { id } = useParams()
+   
 
 
     useEffect(() => {

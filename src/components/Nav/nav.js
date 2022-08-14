@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import './Nav.css'
-// import { useDispatch, useSelector } from 'react-redux';
 
 const Navbar = () => {
 

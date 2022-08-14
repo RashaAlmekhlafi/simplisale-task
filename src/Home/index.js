@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Product from '../components/product'
-import { useSelector } from 'react-redux';
 
 const Home = () => {
-    const token = useSelector((state) => state.auth.token)
 
     const [productsData, setProductsData] = useState([])
-    const [Messg, setMessg] = useState([])
     useEffect(() => {
         fetch('https://simplisaleshw.cotunnel.com/graphql', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
             },
             body: JSON.stringify({
                 query: `query {

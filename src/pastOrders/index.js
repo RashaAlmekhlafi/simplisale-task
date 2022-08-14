@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import Moment from 'react-moment';
 import { useNavigate } from 'react-router-dom';
 
 const PastOrders = () => {
-    const token = useSelector((state) => state.auth.token)
     const navigate = useNavigate()
 
     const [pastOrdersData, setPastOrdersData] = useState([])
-    const [Messg, setMessg] = useState([])
     useEffect(() => {
         fetch('https://simplisaleshw.cotunnel.com/graphql', {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
             },
             body: JSON.stringify({
                 query: `query {
@@ -39,11 +36,12 @@ const PastOrders = () => {
         })
             .then(response => response.json())
             .then(result => {
+                console.log("past orders", result)
+
                 if (result.errors){
                     navigate('/')
 
                 }else{
-                    console.log("past orders", result)
                     setPastOrdersData(result?.data?.orders)
                 }
                 
