@@ -1,32 +1,22 @@
 
-import React, { useEffect } from 'react';
+import React  from 'react';
 import './login.css'
 import { useRef, useState } from 'react'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
     const emailRef = useRef(null)
     const passwordRef = useRef(null)
     const [Messg, setMessg] = useState(' ')
     const navigate = useNavigate()
-    // useEffect(()=>{
-    //     fetch('https://simplisaleshw.cotunnel.com/graphql', {
-    //         query: `query User  {
-    //             User  {
-    //                 name
-    //                 contact
+    const dispatch = useDispatch()
 
-    //             }
-    //         }`
-    // }).then(result => {
-    //     console.log('resultttt',result)
-    // })
-
-    // })
     const login = () => {
+
         const email = emailRef.current.value
         const password = passwordRef.current.value
         if (email === '' || password === '') {
@@ -38,13 +28,13 @@ const Login = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({query:`mutation{
-                    login (email:"oliverjones@gmail.com", password:"123123")
+                    login (email:"${email}", password:"${password}")
                 }`}),
             })
                 .then(response => response.json())
                 .then(result => {
-                    console.log("result",result?.data?.login)
-                    if (!result.error) {
+                    console.log("result",result)
+                    if (result.errors) {
                         confirmAlert({
                             message: "there was an error",
                             buttons: [
@@ -55,10 +45,12 @@ const Login = () => {
                         })
                     } else {
                         setMessg(' ')
-                        window.localStorage.setItem('token', result?.data?.login);
-                       
+                        dispatch({
+                            type: "login",
+                            payload:[result?.data?.login]
+                        })
 
-                        navigate('/Home')
+                        navigate('/home')
 
                     }
 
@@ -72,11 +64,11 @@ const Login = () => {
 
         <div className='container p-5 '>
             <div className='row'>
-                <div className='col-7 p-5'>
+                <div className='col-lg-7 col-md-12 col-sm-12 p-5'>
                     <h1 className='welcome '>Wellcome to OurWebsiste</h1>
                     <p>Lorem ipsum amet recusandae est quia repellat eum voluptatem voluptatibus vel galisum quibusdam id dolores maiores. Et facilis suscipit et modi beatae sit assumenda asperiores ex laboriosam architecto ea temporibus sint sed internos minima aut pariatur eveniet. Est cupiditate minus ex quis dolorem error quis nam molestiae accusantium et eveniet voluptatem rem dicta minus.</p>
                 </div>
-                <div className='col-5 login d-flex flex-column justify-content-center'>
+                <div className='col-lg-5 col-md-12 col-sm-12 login d-flex flex-column justify-content-center'>
                     <h3>Please Login</h3>
                     <>
                         <div className="mb-3">
