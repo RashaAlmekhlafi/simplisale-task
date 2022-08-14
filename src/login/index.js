@@ -46,7 +46,7 @@ const Login = () => {
                     console.log("result",result?.data?.login)
                     if (!result.error) {
                         confirmAlert({
-                            message: result.message,
+                            message: "there was an error",
                             buttons: [
                                 {
                                     label: 'cansel',
@@ -55,8 +55,7 @@ const Login = () => {
                         })
                     } else {
                         setMessg(' ')
-                        window.localStorage.setItem('token', result.token);
-                        // props.updateToken(result.token)
+                        window.localStorage.setItem('token', result?.data?.login);
                        
 
                         navigate('/Home')
